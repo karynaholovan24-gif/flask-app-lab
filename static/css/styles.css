@@ -1,0 +1,139 @@
+
+body {
+    background: #f4f5fb;
+    color: #282842;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.7;
+}
+
+.site-navbar {
+    background: #252542;
+}
+
+.site-navbar .nav-link {
+    color: #eeeeff;
+}
+
+.site-navbar .nav-link:hover,
+.site-navbar .nav-link.active {
+    color: #aaaaff;
+}
+
+.hero-card,
+.content-card {
+    background: #ffffff;
+    border: 1px solid #e7e8f2;
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: 0 5px 20px rgba(30, 30, 70, 0.05);
+}
+
+.hero-card {
+    padding: 38px;
+}
+
+.profile-image {
+    width: 210px;
+    height: 210px;
+    max-width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid #ededff;
+}
+
+.eyebrow {
+    color: #5b5bd6;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.content-card h2 {
+    font-size: 1.45rem;
+    font-weight: bold;
+    margin-bottom: 18px;
+}
+
+.section-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.section-nav a {
+    color: #5050bb;
+    background: #ffffff;
+    border: 1px solid #e2e3f4;
+    border-radius: 9px;
+    padding: 8px 13px;
+    text-decoration: none;
+}
+
+.section-nav a:hover {
+    background: #ededff;
+}
+
+.technology-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tech-badge {
+    background: #ededff;
+    color: #4545a9;
+    padding: 7px 14px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.project-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #e7e8f2;
+}
+
+.project-item:last-of-type {
+    border-bottom: none;
+}
+
+.btn-primary {
+    background: #5b5bd6;
+    border-color: #5b5bd6;
+}
+
+.btn-primary:hover {
+    background: #4545b5;
+    border-color: #4545b5;
+}
+
+.site-footer {
+    margin-top: 24px;
+    background: #252542;
+    color: #eeeeff;
+}
+
+@media (max-width: 576px) {
+    .hero-card,
+    .content-card {
+        padding: 20px;
+    }
+
+    .hero-card {
+        text-align: center;
+    }
+
+    .profile-image {
+        width: 160px;
+        height: 160px;
+    }
+
+    .section-nav {
+        gap: 7px;
+    }
+
+    .section-nav a {
+        font-size: 0.9rem;
+        padding: 6px 9px;
+    }
+}

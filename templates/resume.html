@@ -1,0 +1,104 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="hero-card mb-4">
+    <div class="row align-items-center g-4">
+        <div class="col-md-4 text-center">
+            <img
+                src="{{ url_for('static', filename='images/logo.png') }}"
+                alt="Моє фото"
+                class="profile-image"
+            >
+        </div>
+
+        <div class="col-md-8">
+            <p class="eyebrow">МОЄ ПОРТФОЛІО</p>
+            <h1 class="display-5 fw-bold">Головань Карина</h1>
+            <p class="lead">Студент / Майбутній веброзробник</p>
+            <p>
+                Вивчаю програмування та веброзробку.
+                Цікавлюся створенням сайтів і сучасними технологіями.
+            </p>
+            <a href="{{ url_for('contacts') }}" class="btn btn-primary">
+                Зв'язатися зі мною
+            </a>
+        </div>
+    </div>
+</section>
+
+<nav class="section-nav mb-4" aria-label="Навігація по резюме">
+    <a href="#about">Про себе</a>
+    <a href="#education">Освіта</a>
+    <a href="#skills">Навички</a>
+    <a href="#technologies">Технології</a>
+    <a href="#projects">Проєкти</a>
+</nav>
+
+<section id="about" class="content-card mb-4">
+    <h2>Про себе</h2>
+    <p>
+        Я студент, який цікавиться інформаційними технологіями
+        та програмуванням. Прагну розвивати свої навички,
+        вивчати нові інструменти й створювати корисні проєкти.
+    </p>
+</section>
+
+<section id="education" class="content-card mb-4">
+    <h2>Освіта</h2>
+    <h3 class="h5">Карпатський Національний Університет</h3>
+    <p class="text-secondary">2024 – дотепер</p>
+    <p>Спеціальність: Інженерія Програмного Забезпечення.</p>
+</section>
+
+<section id="skills" class="content-card mb-4">
+    <h2>Навички</h2>
+    <ul>
+        <li>Основи HTML і CSS</li>
+        <li>Основи програмування на Python</li>
+        <li>Робота з Git</li>
+        <li>Створення вебсторінок</li>
+        <li>Уміння працювати з документацією</li>
+    </ul>
+</section>
+
+<section id="technologies" class="content-card mb-4">
+    <h2>Технології</h2>
+    <div class="technology-list">
+        <span class="tech-badge">HTML5</span>
+        <span class="tech-badge">CSS3</span>
+        <span class="tech-badge">Python</span>
+        <span class="tech-badge">Flask</span>
+        <span class="tech-badge">Bootstrap</span>
+        <span class="tech-badge">Jinja2</span>
+        <span class="tech-badge">Git</span>
+    </div>
+</section>
+
+<section id="projects" class="content-card mb-4">
+    <h2>Досвід роботи та проєкти</h2>
+
+    <article class="project-item">
+        <h3 class="h5">Лабораторна робота №1</h3>
+        <p>
+            Створення найпростішого Flask-додатку,
+            налаштування віртуального середовища
+            та підготовка проєкту до розгортання.
+        </p>
+    </article>
+
+    <article class="project-item">
+        <h3 class="h5">Персональне портфоліо</h3>
+        <p>
+            Створення сайту на Flask із маршрутизацією,
+            шаблонами Jinja2 та адаптивним дизайном.
+        </p>
+    </article>
+
+    <p class="text-secondary mb-0">
+        Комерційний досвід роботи: поки що відсутній.
+    </p>
+</section>
+
+{% endblock %}

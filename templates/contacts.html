@@ -1,0 +1,91 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="mb-4">
+    <p class="eyebrow">БУДЬМО НА ЗВ'ЯЗКУ</p>
+    <h1 class="display-5 fw-bold">Контакти</h1>
+    <p class="text-secondary">
+        Тут ти можеш знайти мої контактні дані
+        або залишити повідомлення.
+    </p>
+</section>
+
+<div class="row g-4">
+    <div class="col-lg-5">
+        <section class="content-card h-100">
+            <h2>Мої контакти</h2>
+
+            <p>
+                <strong>Email:</strong><br>
+                <a href="mailto:karyna.holovan.24@pnu.edu.ua">
+                    karyna.holovan.24@pnu.edu.ua
+                </a>
+            </p>
+
+            <p>
+                <strong>Місто:</strong><br>
+                Івано-Франківськ
+            </p>
+
+            <p class="mb-0">
+                <strong>GitHub:</strong><br>
+                <a href="https://github.com/karynaholovan24-gif"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    https://github.com/karynaholovan24-gif
+                </a>
+            </p>
+        </section>
+    </div>
+
+    <div class="col-lg-7">
+        <section class="content-card">
+            <h2>Написати повідомлення</h2>
+
+            <form method="POST" action="{{ url_for('contacts') }}">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Ім'я</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="name"
+                        name="name"
+                        required
+                    >
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input
+                        type="email"
+                        class="form-control"
+                        id="email"
+                        name="email"
+                        required
+                    >
+                </div>
+
+                <div class="mb-3">
+                    <label for="message" class="form-label">
+                        Повідомлення
+                    </label>
+                    <textarea
+                        class="form-control"
+                        id="message"
+                        name="message"
+                        rows="5"
+                        required
+                    ></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    Надіслати
+                </button>
+            </form>
+        </section>
+    </div>
+</div>
+
+{% endblock %}
