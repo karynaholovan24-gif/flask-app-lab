@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="text-center">
+    <h1>Головна сторінка</h1>
+
+    <p class="lead">
+        Ласкаво просимо до мого Flask-застосунку!
+    </p>
+
+    <p>
+        Лабораторна робота №3.
+        Модульна структура та Blueprints.
+    </p>
+
+    <a href="{{ url_for('resume') }}" class="btn btn-primary">
+        Моє резюме
+    </a>
+
+    <a href="{{ url_for('contacts') }}" class="btn btn-outline-primary">
+        Контакти
+    </a>
+</div>
+
+{% endblock %}

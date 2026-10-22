@@ -1,11 +1,16 @@
-
-from flask import Flask, render_template, request, flash
-
-app = Flask(__name__)
-app.secret_key = "lab2-secret-key"
+from flask import render_template, request, flash
+from . import app
 
 
 @app.route("/")
+def home():
+    return render_template(
+        "homepage.html",
+        title="Головна",
+        page="home"
+    )
+
+
 @app.route("/resume")
 def resume():
     return render_template(
@@ -23,10 +28,7 @@ def contacts():
         message = request.form.get("message", "").strip()
 
         if name and email and message:
-            flash(
-                "Дякую! Форму перевірено.",
-                "success"
-            )
+            flash("Дякую! Форму перевірено.", "success")
         else:
             flash("Заповніть усі поля форми.", "danger")
 
@@ -35,7 +37,3 @@ def contacts():
         title="Контакти",
         page="contacts"
     )
-
-
-if __name__ == "__main__":
-    app.run(debug=True)

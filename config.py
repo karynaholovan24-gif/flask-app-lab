@@ -1,0 +1,1 @@
+SECRET_KEY = "lab2-secret-key"
