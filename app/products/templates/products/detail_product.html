@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>{{ product.name }}</h1>
+
+<p class="fs-5">
+    <strong>Ціна:</strong> {{ product.price }} $
+</p>
+
+<p>
+    <strong>Опис:</strong> {{ product.content }}
+</p>
+
+<a href="{{ url_for('products.product_list') }}"
+   class="btn btn-secondary">
+    Назад до списку товарів
+</a>
+
+{% endblock %}
