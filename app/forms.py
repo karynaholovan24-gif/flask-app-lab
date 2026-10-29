@@ -6,7 +6,13 @@ from wtforms import (
     TextAreaField,
     SubmitField
 )
-from wtforms.validators import DataRequired, Email, Length
+from wtforms.validators import (
+    DataRequired,
+    Email,
+    Length,
+    Optional,
+    Regexp
+)
 
 
 class ContactForm(FlaskForm):
@@ -14,7 +20,11 @@ class ContactForm(FlaskForm):
         "Ім'я",
         validators=[
             DataRequired(message="Введіть ім'я."),
-            Length(min=2, max=100, message="Ім'я має містити від 2 до 100 символів.")
+            Length(
+                min=4,
+                max=10,
+                message="Ім'я має містити від 4 до 10 символів."
+            )
         ]
     )
 
@@ -26,6 +36,21 @@ class ContactForm(FlaskForm):
         ]
     )
 
+    phone = StringField(
+        "Телефон",
+        validators=[
+            Optional(),
+            Regexp(
+                r"^\+380\d{9}$",
+                message="Телефон має бути у форматі +380XXXXXXXXX."
+            )
+        ],
+        render_kw={
+            "placeholder": "+380XXXXXXXXX",
+            "maxlength": 13
+        }
+    )
+
     subject = SelectField(
         "Тема звернення",
         choices=[
@@ -33,9 +58,6 @@ class ContactForm(FlaskForm):
             ("cooperation", "Співпраця"),
             ("feedback", "Відгук"),
             ("other", "Інше")
-        ],
-        validators=[
-            DataRequired(message="Оберіть тему звернення.")
         ]
     )
 
@@ -43,9 +65,15 @@ class ContactForm(FlaskForm):
         "Повідомлення",
         validators=[
             DataRequired(message="Введіть повідомлення."),
-            Length(min=10, max=2000, message="Повідомлення має містити від 10 до 2000 символів.")
+            Length(
+                max=500,
+                message="Повідомлення не може перевищувати 500 символів."
+            )
         ],
-        render_kw={"rows": 5}
+        render_kw={
+            "rows": 5,
+            "maxlength": 500
+        }
     )
 
     submit = SubmitField("Надіслати")
