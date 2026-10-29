@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+
+                <h2 class="mb-4">Мій профіль</h2>
+
+                <div class="alert alert-success">
+                    Ви успішно авторизувалися!
+                </div>
+
+                <p>
+                    <strong>Ім'я користувача:</strong>
+                    {{ username }}
+                </p>
+
+                <p>
+                    Ласкаво просимо до особистого кабінету!
+                </p>
+
+                <hr class="my-4">
+
+<h3 class="mb-3">Керування cookies</h3>
+
+<p class="text-muted">
+    Тут можна створити cookie, вказавши її назву,
+    значення та час зберігання.
+</p>
+
+<form method="POST" action="{{ url_for('users.add_cookie') }}">
+
+    <div class="mb-3">
+        <label for="key" class="form-label">
+            Назва cookie
+        </label>
+
+        <input
+            type="text"
+            class="form-control"
+            id="key"
+            name="key"
+            placeholder="Наприклад: favorite_color"
+            required
+        >
+    </div>
+
+    <div class="mb-3">
+        <label for="value" class="form-label">
+            Значення cookie
+        </label>
+
+        <input
+            type="text"
+            class="form-control"
+            id="value"
+            name="value"
+            placeholder="Наприклад: blue"
+        >
+    </div>
+
+    <div class="mb-3">
+        <label for="max_age" class="form-label">
+            Час зберігання (у секундах)
+        </label>
+
+        <input
+            type="number"
+            class="form-control"
+            id="max_age"
+            name="max_age"
+            value="3600"
+            min="1"
+            required
+        >
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Додати cookie
+    </button>
+
+</form>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Збережені cookies</h3>
+
+{% if cookies %}
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+           <thead>
+    <tr>
+        <th>Назва cookie</th>
+        <th>Значення</th>
+        <th>Дія</th>
+    </tr>
+</thead>
+
+<tbody>
+    {% for key, value in cookies.items() %}
+        <tr>
+            <td>{{ key }}</td>
+            <td>{{ value }}</td>
+
+            <td>
+                <form method="POST"
+                      action="{{ url_for('users.delete_cookie') }}">
+
+                    <input
+                        type="hidden"
+                        name="key"
+                        value="{{ key }}"
+                    >
+
+                    <button type="submit" class="btn btn-danger btn-sm">
+                        Видалити
+                    </button>
+
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+</tbody>
+        </table>
+    </div>
+
+{% else %}
+
+    <div class="alert alert-info">
+        Наразі немає збережених користувацьких cookies.
+    </div>
+
+{% endif %}
+
+<form method="POST"
+      action="{{ url_for('users.delete_all_cookies') }}">
+
+    <button type="submit" class="btn btn-danger">
+        Видалити всі cookies
+    </button>
+
+</form>
+
+<hr class="my-4">
+
+                <form
+                    method="POST"
+                    action="{{ url_for('users.logout') }}"
+                >
+                    <button type="submit" class="btn btn-danger">
+                        Вийти з акаунта
+                    </button>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
