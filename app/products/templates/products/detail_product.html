@@ -1,20 +1,66 @@
 {% extends "base.html" %}
 
 {% block content %}
+<section class="mb-4">
+    <h1 class="display-5 fw-bold">{{ product.name }}</h1>
 
-<h1>{{ product.name }}</h1>
+    {% if product.image %}
+        <img
+            src="{{ url_for('static', filename=product.image) }}"
+            alt="{{ product.name }}"
+            class="img-fluid rounded mb-4"
+            style="max-width: 400px;"
+        >
+    {% else %}
+        <p class="text-secondary">
+            Зображення товару відсутнє.
+        </p>
+    {% endif %}
 
-<p class="fs-5">
-    <strong>Ціна:</strong> {{ product.price }} $
-</p>
+    <p>
+        <strong>Ціна:</strong> {{ product.price }} $
+    </p>
 
-<p>
-    <strong>Опис:</strong> {{ product.content }}
-</p>
+    <p>
+        <strong>Опис:</strong> {{ product.content }}
+    </p>
 
-<a href="{{ url_for('products.product_list') }}"
-   class="btn btn-secondary">
-    Назад до списку товарів
-</a>
+    <p>
+        <strong>Категорія:</strong> {{ product.category }}
+    </p>
 
+    <p>
+        <strong>Кількість:</strong> {{ product.quantity }}
+    </p>
+
+    <div class="d-flex gap-2 mt-4">
+
+        <a href="{{ url_for('products.product_edit', product_id=product.id) }}"
+           class="btn btn-primary">
+            Редагувати
+        </a>
+
+        <form
+            method="POST"
+            action="{{ url_for('products.product_delete', product_id=product.id) }}"
+            onsubmit="return confirm('Ви впевнені, що хочете видалити цей товар?');"
+        >
+            <input
+                type="hidden"
+                name="csrf_token"
+                value="{{ csrf_token() }}"
+            >
+
+            <button type="submit" class="btn btn-danger">
+                Видалити
+            </button>
+        </form>
+
+        <a href="{{ url_for('products.product_list') }}"
+           class="btn btn-secondary">
+            Назад до списку
+        </a>
+
+    </div>
+</section>
 {% endblock %}

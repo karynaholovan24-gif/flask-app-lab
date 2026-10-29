@@ -1,1 +1,3 @@
 SECRET_KEY = "lab2-secret-key"
+
+MAX_CONTENT_LENGTH = 2 * 1024 * 1024
