@@ -1,5 +1,5 @@
-
 {% extends "base.html" %}
+{% from "form_macros.html" import render_field %}
 
 {% block content %}
 
@@ -45,44 +45,19 @@
             <h2>Написати повідомлення</h2>
 
             <form method="POST" action="{{ url_for('contacts') }}">
-                <div class="mb-3">
-                    <label for="name" class="form-label">Ім'я</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="name"
-                        name="name"
-                        required
-                    >
-                </div>
 
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input
-                        type="email"
-                        class="form-control"
-                        id="email"
-                        name="email"
-                        required
-                    >
-                </div>
+                {{ form.hidden_tag() }}
 
-                <div class="mb-3">
-                    <label for="message" class="form-label">
-                        Повідомлення
-                    </label>
-                    <textarea
-                        class="form-control"
-                        id="message"
-                        name="message"
-                        rows="5"
-                        required
-                    ></textarea>
-                </div>
+                {{ render_field(form.name) }}
 
-                <button type="submit" class="btn btn-primary">
-                    Надіслати
-                </button>
+                {{ render_field(form.email) }}
+
+                {{ render_field(form.subject) }}
+
+                {{ render_field(form.message) }}
+
+                {{ form.submit(class="btn btn-primary") }}
+
             </form>
         </section>
     </div>
