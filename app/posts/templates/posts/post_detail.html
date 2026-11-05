@@ -1,0 +1,49 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4 mb-5">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">{{ post.title }}</h2>
+
+            <p class="text-muted">
+                Автор: {{ post.author }}
+            </p>
+
+            <p class="text-muted">
+                Категорія: {{ post.category }}
+            </p>
+
+            <p class="text-muted">
+                Дата публікації:
+                {{ post.posted.strftime('%d.%m.%Y %H:%M') }}
+            </p>
+
+            <hr>
+
+            <p class="card-text" style="white-space: pre-line;">{{ post.content }}</p>
+
+            <hr>
+
+            <p>
+                Статус:
+                {% if post.is_active %}
+                    <span class="badge bg-success">Активний</span>
+                {% else %}
+                    <span class="badge bg-secondary">Неактивний</span>
+                {% endif %}
+            </p>
+
+            <a href="{{ url_for('posts.list_posts') }}" class="btn btn-primary">
+                Назад до списку
+            </a>
+            
+            <a href="{{ url_for('posts.update_post', id=post.id) }}" class="btn btn-warning">
+                Редагувати
+            </a>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

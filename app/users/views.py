@@ -162,7 +162,7 @@ def delete_all_cookies():
 def set_theme(theme):
     if theme not in ["light", "dark"]:
         flash("Невідома тема оформлення!", "danger")
-        return redirect(url_for("home"))
+        return redirect(url_for("main.home"))
 
     session["theme"] = theme
 
@@ -171,4 +171,4 @@ def set_theme(theme):
     else:
         flash("Світлу тему увімкнено!", "success")
 
-    return redirect(request.referrer or url_for("home"))
+    return redirect(request.referrer or url_for("main.home"))

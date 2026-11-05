@@ -1,14 +1,15 @@
+
 import logging
 from pathlib import Path
 
-from flask import render_template, redirect, url_for, flash, request
+from flask import Blueprint, current_app, render_template, redirect, url_for, flash, request
 
-from . import app
 from .forms import ContactForm
 
 
-# Налаштування журналу повідомлень
-log_dir = Path(app.root_path).parent / "logs"
+main_bp = Blueprint("main", __name__)
+
+log_dir = Path(__file__).resolve().parent.parent / "logs"
 log_dir.mkdir(exist_ok=True)
 
 contact_logger = logging.getLogger("contact_form")
@@ -25,7 +26,7 @@ if not contact_logger.handlers:
     contact_logger.addHandler(file_handler)
 
 
-@app.route("/")
+@main_bp.route("/")
 def home():
     return render_template(
         "homepage.html",
@@ -34,7 +35,7 @@ def home():
     )
 
 
-@app.route("/resume")
+@main_bp.route("/resume")
 def resume():
     return render_template(
         "resume.html",
@@ -43,7 +44,7 @@ def resume():
     )
 
 
-@app.route("/contacts", methods=["GET", "POST"])
+@main_bp.route("/contacts", methods=["GET", "POST"])
 def contacts():
     form = ContactForm()
 
@@ -62,10 +63,10 @@ def contacts():
                 "success"
             )
 
-            return redirect(url_for("contacts"))
+            return redirect(url_for("main.contacts"))
 
         except OSError:
-            app.logger.exception("Помилка запису контактної форми")
+            current_app.logger.exception("Помилка запису контактної форми")
 
             flash(
                 "Не вдалося зберегти повідомлення. Спробуйте ще раз.",

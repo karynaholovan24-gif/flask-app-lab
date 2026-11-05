@@ -1,0 +1,13 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container text-center py-5">
+    <h1 class="display-1">404</h1>
+    <h2>Сторінку не знайдено</h2>
+    <p>На жаль, сторінки за цією адресою не існує.</p>
+    <a href="{{ url_for('main.home') }}" class="btn btn-primary">
+        Повернутися на головну
+    </a>
+</div>
+{% endblock %}

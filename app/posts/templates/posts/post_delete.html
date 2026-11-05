@@ -1,0 +1,32 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4 mb-5">
+    <div class="card border-danger">
+        <div class="card-body">
+            <h2 class="text-danger mb-3">Видалення допису</h2>
+
+            <p>Ви впевнені, що хочете видалити допис?</p>
+
+            <h4>{{ post.title }}</h4>
+
+            <p class="text-muted">
+                Після видалення відновити допис буде неможливо.
+            </p>
+
+            <form method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                <button type="submit" class="btn btn-danger">
+                    Так, видалити
+                </button>
+
+                <a href="{{ url_for('posts.post_detail', id=post.id) }}" class="btn btn-secondary">
+                    Скасувати
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
