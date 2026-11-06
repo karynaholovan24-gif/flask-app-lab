@@ -1,40 +1,18 @@
 
 {% extends "base.html" %}
+{% from "_form_macros.html" import render_field %}
 
 {% block content %}
 <div class="container mt-4 mb-5">
-    <h2 class="mb-4">Створення допису</h2>
+    <h2 class="mb-4">Створення або редагування допису</h2>
 
     <form method="POST">
         {{ form.hidden_tag() }}
 
-        <div class="mb-3">
-            {{ form.title.label(class="form-label") }}
-            {{ form.title(class="form-control") }}
-
-            {% for error in form.title.errors %}
-                <div class="text-danger">{{ error }}</div>
-            {% endfor %}
-        </div>
-
-        <div class="mb-3">
-            {{ form.content.label(class="form-label") }}
-            {{ form.content(class="form-control", rows="6") }}
-
-            {% for error in form.content.errors %}
-                <div class="text-danger">{{ error }}</div>
-            {% endfor %}
-        </div>
-
-        <div class="mb-3">
-            {{ form.category.label(class="form-label") }}
-            {{ form.category(class="form-select") }}
-        </div>
-
-        <div class="mb-3">
-            {{ form.publish_date.label(class="form-label") }}
-            {{ form.publish_date(class="form-control") }}
-        </div>
+        {{ render_field(form.title) }}
+        {{ render_field(form.content) }}
+        {{ render_field(form.category) }}
+        {{ render_field(form.publish_date) }}
 
         <div class="form-check mb-3">
             {{ form.enabled(class="form-check-input") }}

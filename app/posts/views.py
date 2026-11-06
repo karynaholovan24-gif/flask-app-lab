@@ -12,9 +12,6 @@ from .models import Post
 def create_post():
     form = PostForm()
 
-    if form.is_submitted():
-        form.validate()
-        print("Помилки форми:", form.errors)
 
     if form.validate_on_submit():
         post = Post(
@@ -35,15 +32,21 @@ def create_post():
     return render_template("posts/post_form.html", form=form)
 
 
+
 @post_bp.route("", methods=["GET"])
 @post_bp.route("/", methods=["GET"])
 def list_posts():
-    posts = Post.query.order_by(Post.posted.desc()).all()
+    posts = db.session.scalars(
+        db.select(Post)
+        .where(Post.is_active.is_(True))
+        .order_by(Post.posted.desc())
+    ).all()
 
     return render_template(
         "posts/post_list.html",
         posts=posts
     )
+
 
 
 @post_bp.route("/<int:id>", methods=["GET"])
