@@ -1,7 +1,7 @@
-
 from datetime import datetime
 
-from sqlalchemy import Enum
+from sqlalchemy import Boolean, DateTime, Enum, String, Text
+from sqlalchemy.orm import Mapped, mapped_column
 
 from app import db
 
@@ -9,17 +9,20 @@ from app import db
 class Post(db.Model):
     __tablename__ = "posts"
 
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(150), nullable=False)
-    content = db.Column(db.Text, nullable=False)
-    posted = db.Column(db.DateTime, default=datetime.utcnow)
-    category = db.Column(
+    id: Mapped[int] = mapped_column(primary_key=True)
+    title: Mapped[str] = mapped_column(String(150), nullable=False)
+    content: Mapped[str] = mapped_column(Text, nullable=False)
+    posted: Mapped[datetime | None] = mapped_column(
+        DateTime,
+        default=datetime.utcnow,
+    )
+    category: Mapped[str] = mapped_column(
         Enum("news", "publication", "tech", "other", name="post_category"),
         nullable=False,
-        default="other"
+        default="other",
     )
-    is_active = db.Column(db.Boolean, default=True)
-    author = db.Column(db.String(20), default="Anonymous")
+    is_active: Mapped[bool | None] = mapped_column(Boolean, default=True)
+    author: Mapped[str | None] = mapped_column(String(20), default="Anonymous")
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"<Post {self.id}: {self.title}>"
