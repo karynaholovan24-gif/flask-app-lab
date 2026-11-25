@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block css %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('posts.static', filename='css/posts.css') }}">
+{% endblock %}
 {% block content %}
 <div class="container mt-4 mb-5">
     <div class="card post-detail-card">
