@@ -152,7 +152,6 @@ def posts_by_user_command(user_id):
 def seed_lab8_command():
     """Create repeatable Lab 8 data for two users, five posts, and three tags."""
     import secrets
-    from werkzeug.security import generate_password_hash
 
     users_by_name = {user.username: user for user in db.session.scalars(select(User)).all()}
     for username, email in (
@@ -164,8 +163,9 @@ def seed_lab8_command():
             user = User(
                 username=username,
                 email=email,
-                password=generate_password_hash(secrets.token_urlsafe(32)),
+                password="",
             )
+            user.set_password(secrets.token_urlsafe(32))
             db.session.add(user)
             users_by_name[username] = user
     tags_by_name = {tag.name: tag for tag in db.session.scalars(select(Tag)).all()}

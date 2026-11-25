@@ -1,4 +1,6 @@
 from flask import Flask, render_template
+from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
 from flask_wtf.csrf import CSRFProtect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -23,6 +25,8 @@ class Base(DeclarativeBase):
 db = SQLAlchemy(model_class=Base)
 migrate = Migrate()
 csrf = CSRFProtect()
+bcrypt = Bcrypt()
+login_manager = LoginManager()
 
 
 def create_app(config_name="development"):
@@ -34,6 +38,11 @@ def create_app(config_name="development"):
     db.init_app(app)
     migrate.init_app(app, db)
     csrf.init_app(app)
+    bcrypt.init_app(app)
+    login_manager.init_app(app)
+    login_manager.login_view = "users.login"
+    login_manager.login_message = "Спочатку увійдіть у систему."
+    login_manager.login_message_category = "warning"
 
     from .views import main_bp
     app.register_blueprint(main_bp)
@@ -49,8 +58,15 @@ def create_app(config_name="development"):
 
     from .posts import models as post_models
     from .products import models as product_models
-    from .users import models as user_models
+    from .users.models import User
     from .posts.views import register_cli, register_comparison_cli
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        try:
+            return db.session.get(User, int(user_id))
+        except (TypeError, ValueError):
+            return None
 
     register_cli(app)
     register_comparison_cli(app)

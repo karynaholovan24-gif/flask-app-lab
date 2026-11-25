@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-7">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <h1 class="h2 mb-3">Особистий кабінет</h1>
+                <div class="alert alert-success">Ви увійшли до системи.</div>
+                <p><strong>Ім’я користувача:</strong> {{ current_user.username }}</p>
+                <p><strong>Електронна пошта:</strong> {{ current_user.email }}</p>
+                <a class="btn btn-outline-primary" href="{{ url_for('users.profile') }}">Керування cookies</a>
+                <a class="btn btn-outline-secondary" href="{{ url_for('users.user_list') }}">Список користувачів</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
