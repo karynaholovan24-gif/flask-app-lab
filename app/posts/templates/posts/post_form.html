@@ -1,25 +1,33 @@
-
 {% extends "base.html" %}
 {% from "_form_macros.html" import render_field %}
 
 {% block content %}
 <div class="container mt-4 mb-5">
-    <h2 class="mb-4">Створення або редагування допису</h2>
+    <h2 class="mb-4">{% if post %}Редагування допису{% else %}Створення допису{% endif %}</h2>
 
-    <form method="POST">
+    <form method="POST" class="post-form">
         {{ form.hidden_tag() }}
-
         {{ render_field(form.title) }}
         {{ render_field(form.content) }}
         {{ render_field(form.category) }}
         {{ render_field(form.publish_date) }}
+        {{ render_field(form.author_id) }}
+
+        <div class="mb-3">
+            {{ form.tags.label(class="form-label") }}
+            {{ form.tags(class="form-select" + (" is-invalid" if form.tags.errors else ""), size="4") }}
+            <div class="form-text">Щоб вибрати кілька тегів, утримуйте Ctrl (Windows) або Command (Mac).</div>
+            {% for error in form.tags.errors %}
+                <div class="invalid-feedback d-block">{{ error }}</div>
+            {% endfor %}
+        </div>
 
         <div class="form-check mb-3">
             {{ form.enabled(class="form-check-input") }}
             {{ form.enabled.label(class="form-check-label") }}
         </div>
-
         {{ form.submit(class="btn btn-primary") }}
+        <a href="{{ url_for('posts.list_posts') }}" class="btn btn-outline-secondary">Скасувати</a>
     </form>
 </div>
 {% endblock %}

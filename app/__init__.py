@@ -27,10 +27,9 @@ csrf = CSRFProtect()
 
 def create_app(config_name="development"):
     app = Flask(__name__)
-
-    app.config.from_object(
-        config.get(config_name, config["default"])
-    )
+    app.config.from_object(config.get(config_name, config["default"]))
+    if config_name == "development":
+        app.config["SQLALCHEMY_ECHO"] = True
 
     db.init_app(app)
     migrate.init_app(app, db)
@@ -50,6 +49,11 @@ def create_app(config_name="development"):
 
     from .posts import models as post_models
     from .products import models as product_models
+    from .users import models as user_models
+    from .posts.views import register_cli, register_comparison_cli
+
+    register_cli(app)
+    register_comparison_cli(app)
 
     @app.errorhandler(404)
     def page_not_found(error):

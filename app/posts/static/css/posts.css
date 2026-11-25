@@ -1,4 +1,3 @@
-
 .posts-page {
     padding-top: 30px;
     padding-bottom: 50px;
@@ -9,16 +8,20 @@
     font-weight: 700;
 }
 
-.post-card {
+.post-card,
+.post-detail-card {
     border: none;
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+}
+
+.post-card {
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .post-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-4px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
@@ -28,7 +31,8 @@
     object-fit: cover;
 }
 
-.post-card .card-body {
+.post-card .card-body,
+.post-detail-card .card-body {
     padding: 24px;
 }
 
@@ -38,27 +42,34 @@
     margin-bottom: 15px;
 }
 
-.post-card .card-text {
+.post-card .card-text,
+.post-content {
     color: #555;
     line-height: 1.6;
+    white-space: pre-line;
+}
+
+.post-category,
+.post-tag {
+    display: inline-block;
+    padding: 4px 11px;
+    margin: 2px 4px 2px 0;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
 }
 
 .post-category {
-    display: inline-block;
-    padding: 5px 12px;
-    background-color: #e8f0fe;
+    background: #e8f0fe;
     color: #2457a7;
-    border-radius: 20px;
-    font-size: 14px;
+}
+
+.post-tag {
+    background: #fff0e5;
+    color: #9a4b13;
 }
 
 .post-date {
     color: #777;
     font-size: 13px;
-}
-
-.post-button {
-    border-radius: 8px;
-    padding: 9px 18px;
-    font-weight: 600;
 }
